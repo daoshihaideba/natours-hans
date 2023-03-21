@@ -10,6 +10,7 @@ router.get(
   authController.isLoggedin,
   viewController.getOverview
 );
+router.use(viewController.alerts);
 router.get('/tour/:slug', authController.isLoggedin, viewController.getTour);
 
 router.get('/login', authController.isLoggedin, viewController.getLoginForm);
