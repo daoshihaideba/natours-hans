@@ -108,7 +108,6 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   // 4) Check if user changed password after the token was issued
-  console.log(decode);
   // if (currentUser.changePasswordAfter(decode.iat)) {
   //   return next(
   //     new AppError('User recently changed password! Please log in again.', 401)
@@ -228,7 +227,6 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id).select('+password');
 
   //2) check if posted current password is corrent
-  console.log(req.body);
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
     return next(new AppError('Your current password is wrong.', 401));
   }

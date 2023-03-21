@@ -27,7 +27,6 @@ exports.uploadTourImages = upload.fields([
 
 // upload.array('images',5)
 exports.resizeTourImages = catchAsync(async (req, res, next) => {
-  console.log(11111111, req.files);
   if (!req.files.imageCover || !req.files.images) return next();
   //1) Cover image
 
@@ -125,7 +124,6 @@ exports.getTourStats = catchAsync(async (req, res, next) => {
 
 exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
   const year = req.params.year * 1; //2021
-  console.log('1111', req.params.year);
   const plan = await Tour.aggregate([
     {
       $unwind: '$startDates'
@@ -183,7 +181,6 @@ exports.getToursWithin = catchAsync(async (req, res, next) => {
   const tours = await Tour.find({
     startLocation: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
   });
-  console.log(distance, lat, lng, unit);
   res.status(200).json({
     status: 'success',
     results: this.getAllTours.length,
