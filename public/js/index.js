@@ -5,6 +5,7 @@ import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alert';
 
+import { signup } from './signup';
 //DOM ELEMENTS
 const updateUI = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -38,7 +39,7 @@ window.onload = function() {
   const userDataForm = document.querySelector('.form-user-data');
   const userPasswordForm = document.querySelector('.form-user-password');
   const bookBtn = document.querySelector('.span-all-rows');
-
+  const signupform = document.querySelector('.form--sigup');
   //VALUES
 
   //delegation
@@ -55,7 +56,17 @@ window.onload = function() {
       login(email, password);
     });
   }
-
+  if (signupform) {
+    signupform.addEventListener('submit', e => {
+      console.log(11111111111);
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const passwordConfirm = document.getElementById('passwordconfirm').value;
+      signup(name, email, password, passwordConfirm);
+    });
+  }
   if (logoutBtn) logoutBtn.addEventListener('click', logout);
   if (userDataForm)
     userDataForm.addEventListener('submit', e => {
